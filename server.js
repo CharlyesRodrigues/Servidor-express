@@ -20,7 +20,7 @@ res.status(200).json({todos});
 
 })
 
-app.post ("/todos", (req,res )=> {
+app.post("/todos", (req,res )=> {
 const { body }   =  req;
 const todo = body;
 
@@ -33,24 +33,28 @@ todo.date = new Date();
 
 todos.push(todo);
 
-res.status(201).send(todo )
+res.status(201).send(todo);
     
     
 })
 app.put("/todos", (req,res )=> {
 
 const { id } = req.headers;
+
+const {title, description, concluided} = req.query;
 const todo = todos.find(todo => todo.id === id);
 
-
-    res.status(202).send(todo)
+todo.title = title;
+todo.description = description;
+todo.concluided = concluided;
+    res.status(202).send(todo);
     
     
 })
     
 app.delete("/todos", (req,res )=> {
   
-    res.status(202).send()
+    res.status(202).send();
         
 })
     

@@ -39,17 +39,17 @@ res.status(201).send(todo )
 })
 app.put("/todos", (req,res )=> {
 
+const { id } = req.headers;
+const todo = todos.find(todo => todo.id === id);
 
 
-    
-    res.status(202).send()
+    res.status(202).send(todo)
     
     
 })
     
 app.delete("/todos", (req,res )=> {
-    const { body }   =  req;
-    todos.delete(body);
+  
     res.status(202).send()
         
 })

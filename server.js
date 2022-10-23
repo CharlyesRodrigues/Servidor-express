@@ -41,12 +41,14 @@ app.put("/todos", (req,res )=> {
 
 const { id } = req.headers;
 
-const {title, description, concluided} = req.query;
+let {title, description, concluded} = req.query;
+concluded == "true" ? concluded = true : concluded = false;
+
 const todo = todos.find(todo => todo.id === id);
 
-todo.title = title;
-todo.description = description;
-todo.concluided = concluided;
+todo.title = title ? title : todo.title;
+todo.description = description ? description : todo.description ;
+todo.concluded = concluded ? concluded : todo.concluded;
     res.status(202).send(todo);
     
     
@@ -54,6 +56,11 @@ todo.concluided = concluided;
     
 app.delete("/todos", (req,res )=> {
   
+    const { id } = req.headers;
+
+    const index = todos.indexOf(todo => todo.id ==id);
+    todos.splice(index, 1);
+
     res.status(202).send();
         
 })
